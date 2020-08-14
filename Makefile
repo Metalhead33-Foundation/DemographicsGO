@@ -15,10 +15,10 @@ start: .db-migrate
 
 backend: bin/demographics
 
-.frontend-init: frontend/package.json frontend/yarn.lock
+frontend/.frontend-init: frontend/package.json frontend/yarn.lock
 	pushd frontend && yarn && touch .frontend-init || rm .frontend-init
 
-frontend: .frontend-init
+frontend: frontend/.frontend-init
 	pushd frontend && yarn build
 	rm -rf assets
 	cp -r frontend/build assets
