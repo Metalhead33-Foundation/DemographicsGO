@@ -1,0 +1,6 @@
+{
+  "eslint.nodePath": "frontend/.yarn/sdks",
+  "prettier.prettierPath": "frontend/.yarn/sdks/prettier/index.js",
+  "typescript.tsdk": "frontend/.yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
