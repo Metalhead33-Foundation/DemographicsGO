@@ -1,19 +1,24 @@
-all: build
+all: backend frontend
 
 migrate: .db-migrate
 
-.db-migrate: .db-init
+.db-migrate: .db-init backend
 	bin/demographics migrate up | tee .db-migrate
 
 migrate-init: .db-init
 
-.db-init: bin/demographics
+.db-init: backend
 	bin/demographics migrate init | tee .db-init
 
 start: .db-migrate
 	bin/demographics start
 
-build: bin/demographics
+backend: bin/demographics
+
+frontend:
+	pushd frontend && yarn build
+	rm -rf assets
+	cp -r frontend/build assets
 
 test: target/tests/report.xml target/site/clover/clover.xml
 
@@ -39,3 +44,5 @@ target/tests/report.xml: target/tests/report.txt bin/go-junit-report
 target/site/clover/clover.xml: target/tests/coverage.out bin/go-clover
 	mkdir -p $(dir $@)
 	bin/go-clover -f $< -o $@
+
+.PHONY: frontend all
