@@ -15,7 +15,10 @@ start: .db-migrate
 
 backend: bin/demographics
 
-frontend:
+.frontend-init:
+	pushd frontend && yarn
+
+frontend: .frontend-init
 	pushd frontend && yarn build
 	rm -rf assets
 	cp -r frontend/build assets
