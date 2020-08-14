@@ -15,8 +15,8 @@ start: .db-migrate
 
 backend: bin/demographics
 
-.frontend-init:
-	pushd frontend && yarn
+.frontend-init: frontend/package.json frontend/yarn.lock
+	pushd frontend && yarn && touch .frontend-init || rm .frontend-init
 
 frontend: .frontend-init
 	pushd frontend && yarn build
