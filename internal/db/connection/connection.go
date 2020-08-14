@@ -36,7 +36,7 @@ func init() {
 				opts.Role != newOpts.Role {
 				opts = newOpts
 				opts.OnConnect = func(ctx context.Context, cn *pg.Conn) error {
-					_, err := cn.Exec("SET ROLE ?", opts.Role)
+					_, err := cn.Exec("SET ROLE ?; SET search_path = demographics;", opts.Role)
 					return err
 				}
 				conn = nil

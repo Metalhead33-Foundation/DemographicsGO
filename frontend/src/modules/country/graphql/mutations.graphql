@@ -1,0 +1,17 @@
+mutation CreateCountry($input: CountryInput!) {
+    country: createCountry(input: $input) {
+        id
+        name
+    }
+}
+
+mutation UpdateCountry($id: Int64!, $input: CountryInput!) {
+    country: updateCountry(id: $id, input: $input) {
+        id
+        name
+    }
+}
+
+mutation DeleteCountry($id: Int64!) {
+    deleted: deleteCountry(id: $id)
+}

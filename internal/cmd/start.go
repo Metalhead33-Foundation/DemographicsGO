@@ -17,6 +17,9 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+	"wod-go.sonck.nl/demographics/internal"
+	"wod-go.sonck.nl/demographics/internal/server"
 
 	"github.com/spf13/cobra"
 )
@@ -32,7 +35,17 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("start called")
+		fmt.Printf("Receipt Manager %v (%v)\n", internal.VersionText, internal.GoVersionText)
+		s, err := server.Make()
+		if err != nil {
+			_, _ = fmt.Fprintln(os.Stderr, "failed to start:", err.Error())
+			return
+		}
+		err = s.Run()
+		if err != nil {
+			_, _ = fmt.Fprintln(os.Stderr, "failed to start:", err.Error())
+			return
+		}
 	},
 }
 

@@ -1,0 +1,4 @@
+extend type Query {
+    countries: [Country!]!
+    country(id: Int64!): Country
+}

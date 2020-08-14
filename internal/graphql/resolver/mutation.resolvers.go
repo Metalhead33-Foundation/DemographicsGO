@@ -5,13 +5,22 @@ package resolver
 
 import (
 	"context"
-	"fmt"
+	"wod-go.sonck.nl/demographics/internal/db"
 
+	"wod-go.sonck.nl/demographics/internal/db/model"
 	"wod-go.sonck.nl/demographics/internal/graphql/generated"
 )
 
-func (r *mutationResolver) Dummy(ctx context.Context) (*string, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *mutationResolver) CreateCountry(ctx context.Context, input model.CountryInput) (*model.Country, error) {
+	return r.Repository.CreateCountry(ctx, &input)
+}
+
+func (r *mutationResolver) UpdateCountry(ctx context.Context, id int64, input model.CountryInput) (*model.Country, error) {
+	return r.Repository.UpdateCountry(ctx, id, &input)
+}
+
+func (r *mutationResolver) DeleteCountry(ctx context.Context, id int64) (*bool, error) {
+	return db.IsDeleted(r.Repository.DeleteCountry(ctx, id))
 }
 
 // Mutation returns generated.MutationResolver implementation.

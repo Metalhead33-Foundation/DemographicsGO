@@ -1,0 +1,9 @@
+input CountryInput {
+    name: String!
+}
+
+extend type Mutation {
+    createCountry(input: CountryInput!): Country!
+    updateCountry(id: Int64!, input: CountryInput!): Country!
+    deleteCountry(id: Int64!): Boolean
+}

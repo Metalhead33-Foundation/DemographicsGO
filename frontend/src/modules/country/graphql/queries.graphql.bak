@@ -1,0 +1,13 @@
+query AllCountries {
+    countries {
+        id
+        name
+    }
+}
+
+query GetCountry($id: Int64!) {
+    country(id: $id) {
+        id
+        name
+    }
+}

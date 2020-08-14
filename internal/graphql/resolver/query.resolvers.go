@@ -7,11 +7,21 @@ import (
 	"context"
 	"fmt"
 
+	"wod-go.sonck.nl/demographics/internal"
+	"wod-go.sonck.nl/demographics/internal/db/model"
 	"wod-go.sonck.nl/demographics/internal/graphql/generated"
 )
 
 func (r *queryResolver) Version(ctx context.Context) (string, error) {
-	panic(fmt.Errorf("not implemented"))
+	return fmt.Sprintf("%s (%s)", internal.VersionText, internal.GoVersionText), nil
+}
+
+func (r *queryResolver) Countries(ctx context.Context) ([]model.Country, error) {
+	return r.GetCountries(ctx)
+}
+
+func (r *queryResolver) Country(ctx context.Context, id int64) (*model.Country, error) {
+	return r.GetCountry(ctx, id)
 }
 
 // Query returns generated.QueryResolver implementation.

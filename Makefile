@@ -1,5 +1,11 @@
 all: build
 
+migrate: bin/demographics
+	bin/demographics migrate up
+
+migrate-init: bin/demographics
+	bin/demographics migrate init
+
 build: bin/demographics
 
 test: target/tests/report.xml target/site/clover/clover.xml
