@@ -1,10 +1,17 @@
 all: build
 
-migrate: bin/demographics
-	bin/demographics migrate up
+migrate: .db-migrate
 
-migrate-init: bin/demographics
-	bin/demographics migrate init
+.db-migrate: .db-init
+	bin/demographics migrate up | tee .db-migrate
+
+migrate-init: .db-init
+
+.db-init: bin/demographics
+	bin/demographics migrate init | tee .db-init
+
+start: .db-migrate
+	bin/demographics start
 
 build: bin/demographics
 
