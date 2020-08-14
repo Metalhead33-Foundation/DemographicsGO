@@ -17,7 +17,7 @@ resolver:
 omit_slice_element_pointers: true
 
 autobind:
-  - "go.sonck.nl/misc/receipts/internal/db/model"
+  - "wod-go.sonck.nl/demographics/internal/db/model"
 
 models:
   ID:
